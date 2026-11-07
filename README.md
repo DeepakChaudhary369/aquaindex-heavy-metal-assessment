@@ -1,5 +1,8 @@
 # Heavy Metal Pollution Index (HPI) & Evaluation Index (HEI) Assessment Platform
 
+https://aquaindex-heavy-metal-assessment.vercel.app?_vercel_share=6t4BREnqYjQC4EJCW5fW6ybRV3z1bCLA
+
+
 A full-stack, responsive web application for assessing heavy metal pollution in water samples, performing automated scientific calculations, comparing measurements with authoritative WHO and BIS drinking water standards, rendering spatial contamination maps, and generating certified environmental reports.
 
 ---
