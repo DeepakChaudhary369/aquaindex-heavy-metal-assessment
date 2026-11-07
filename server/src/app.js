@@ -64,7 +64,7 @@ app.use(
       return callback(
          new Error('CORS policy: This origin is not authorized by the server.')
       );
-    };
+    },
 
     credentials: true,
 
@@ -74,7 +74,7 @@ app.use(
       'PUT',
       'DELETE',
       'OPTIONS',
-    ];
+    ],
 
     allowedHeaders: [
       'Content-Type',
