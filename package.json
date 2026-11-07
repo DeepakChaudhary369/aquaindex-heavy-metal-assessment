@@ -1,0 +1,30 @@
+{
+  "name": "heavy-metal-pollution-app",
+  "version": "1.0.0",
+  "description": "Design and Development of a Web-Based Application for Heavy Metal Pollution Index Assessment and Visualization of Water Quality",
+  "scripts": {
+    "start": "concurrently -n \"SERVER,CLIENT\" -c \"cyan,magenta\" \"npm run server\" \"npm run client\"",
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"cyan,magenta\" \"npm run server\" \"npm run client\"",
+    "server": "npm run dev --prefix server",
+    "client": "npm run dev --prefix client",
+    "seed": "npm run seed --prefix server",
+    "test": "npm test --prefix server",
+    "build": "npm run build --prefix client"
+  },
+  "keywords": [
+    "heavy-metal-pollution",
+    "water-quality",
+    "hpi",
+    "hei",
+    "environmental-monitoring",
+    "full-stack",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "Antigravity Environmental Solutions",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

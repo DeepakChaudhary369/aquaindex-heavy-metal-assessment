@@ -1,0 +1,3 @@
+/* AquaIndex Global Stylesheet Forwarder */
+@import './styles/index.css';
+@import './styles/layout.css';
