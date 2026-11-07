@@ -22,32 +22,68 @@ const app = express();
 // Security HTTP headers
 app.use(helmet());
 
-// CORS configuration restricted to client origins
+// CORS configuration
 const allowedOrigins = [
+  // Local development
   process.env.CLIENT_URL || 'http://localhost:5173',
+  'http://localhost:5173',
   'http://127.0.0.1:5173',
+  'http://localhost:5174',
+  'http://127.0.0.1:5174',
   'http://localhost:3000',
   'http://127.0.0.1:3000',
+
+  // Production Vercel frontend
+   'https://aquaindex-heavy-metal-assessment-dg5i5y5b8.vercel.app',
 ];
 
-const isAllowedVercelOrigin = (origin) => {
-  return /^https:\/\/aquaindex-heavy-metal-assessment.*\.vercel\.app$/.test(origin);
-};
+
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps, curl, or Postman)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1 || isAllowedVercelOrigin(origin) || process.env.NODE_ENV === 'development') {
+      // Allow requests without an Origin header
+      // (Postman, curl, server-to-server requests, etc.)
+      if (!origin) {
         return callback(null, true);
       }
-      return callback(new Error('CORS policy: This origin is not authorized by the server.'));
-    },
+      // Allow explicitly trusted origins
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      // Allow Vercel preview/deployment URLs
+      if (
+        /^https:\/\/aquaindex-heavy-metal-assessment.*\.vercel\.app$/.test(
+          origin
+        )
+      ) {
+        return callback(null, true);
+      }
+
+      // Reject unknown origins
+      return callback(
+         new Error('CORS policy: This origin is not authorized by the server.')
+      );
+    };
+
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+
+    methods: [
+      'GET',
+      'POST',
+      'PUT',
+      'DELETE',
+      'OPTIONS',
+    ];
+
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'X-Requested-With',
+    ],
   })
 );
+
 
 // Request body parser
 app.use(express.json({ limit: '10mb' }));
